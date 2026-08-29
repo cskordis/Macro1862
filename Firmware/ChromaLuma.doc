@@ -1,0 +1,157 @@
+
+*******************************************************************************
+                                  ChromaLuma
+*******************************************************************************
+
+CUPL(WM)        5.0a Serial# MW-10400000
+Device          p22v10  Library DLIB-h-40-17
+Created         Thu Jul 30 14:44:43 2026
+Name            ChromaLuma 
+Partno          CDP1862 
+Revision        04 
+Date            07/25/2026 
+Designer        Costas Skordis 
+Company         None 
+Assembly        None 
+Location        None 
+
+===============================================================================
+                            Expanded Product Terms
+===============================================================================
+
+BKG_LUM =>
+    LUMA & NO_COLOR & VLI
+  # LUMA & RED & VLI
+  # BLUE & LUMA & VLI
+  # GREEN & LUMA & VLI
+
+BKG_STP =>
+    BKG & STP & VLI
+
+BLACK =>
+    !BLUE & !GREEN & !RED
+
+BLUE_CHR =>
+    CHR_270
+  # HBI
+  # !BLUE & LUMA
+  # BLUE & GREEN & LUMA & RED
+  # LUMA & NO_COLOR
+
+BLUE_LUM =>
+    BLUE & LUMA
+  # LUMA & NO_COLOR
+
+GREEN_CHR =>
+    CHR_270
+  # HBI
+  # !GREEN & LUMA
+  # BLUE & GREEN & LUMA & RED
+  # LUMA & NO_COLOR
+
+GREEN_LUM =>
+    GREEN & LUMA
+  # LUMA & NO_COLOR
+
+HBI =>
+    !VLI
+
+RED_CHR =>
+    CHR_90
+  # HBI
+  # LUMA & !RED
+  # BLUE & GREEN & LUMA & RED
+  # LUMA & NO_COLOR
+
+RED_LUM =>
+    LUMA & RED
+  # LUMA & NO_COLOR
+
+VLI =>
+    !RESET & !SYNC & VLI
+  # LD_CLK & !RESET & STP & !SYNC & !VLI
+
+WHITE =>
+    NO_COLOR
+  # BLUE & GREEN & RED
+
+BKG_LUM.oe  =>
+    1 
+
+BKG_STP.oe  =>
+    1 
+
+BLUE_CHR.oe  =>
+    1 
+
+BLUE_LUM.oe  =>
+    1 
+
+GREEN_CHR.oe  =>
+    1 
+
+GREEN_LUM.oe  =>
+    1 
+
+HBI.oe  =>
+    1 
+
+RED_CHR.oe  =>
+    1 
+
+RED_LUM.oe  =>
+    1 
+
+VLI.oe  =>
+    1 
+
+
+===============================================================================
+                                 Symbol Table
+===============================================================================
+
+Pin Variable                                    Pterms   Max     Min    
+Pol   Name              Ext     Pin     Type     Used   Pterms  Level   
+--- --------            ---     ---     ----    ------  ------  -----   
+
+    BKG                         7        V        -       -       -     
+    BKG_LUM                     20       V        4       14      1     
+    BKG_STP                     21       V        1       12      1     
+    BLACK                       0        I        1       -       -     
+    BLUE                        4        V        -       -       -     
+    BLUE_CHR                    16       V        5       12      1     
+    BLUE_LUM                    19       V        2       16      1     
+    CHR_90                      9        V        -       -       -     
+    CHR_270                     10       V        -       -       -     
+    GREEN                       3        V        -       -       -     
+    GREEN_CHR                   15       V        5       10      1     
+    GREEN_LUM                   18       V        2       16      1     
+    HBI                         23       V        1       8       1     
+ !  LD_CLK                      1        V        -       -       -     
+    LUMA                        8        V        -       -       -     
+    NO_COLOR                    13       V        -       -       -     
+    RED                         2        V        -       -       -     
+    RED_CHR                     14       V        5       8       1     
+    RED_LUM                     17       V        2       14      1     
+ !  RESET                       11       V        -       -       -     
+    STP                         6        V        -       -       -     
+ !  SYNC                        5        V        -       -       -     
+    VLI                         22       V        2       10      1     
+    WHITE                       0        I        2       -       -     
+    BKG_LUM             oe      20       D        1       1       0     
+    BKG_STP             oe      21       D        1       1       0     
+    BLUE_CHR            oe      16       D        1       1       0     
+    BLUE_LUM            oe      19       D        1       1       0     
+    GREEN_CHR           oe      15       D        1       1       0     
+    GREEN_LUM           oe      18       D        1       1       0     
+    HBI                 oe      23       D        1       1       0     
+    RED_CHR             oe      14       D        1       1       0     
+    RED_LUM             oe      17       D        1       1       0     
+    VLI                 oe      22       D        1       1       0     
+
+
+LEGEND    D : default variable         F : field      G : group
+          I : intermediate variable    N : node       M : extended node
+          U : undefined                V : variable   X : extended variable
+          T : function
+

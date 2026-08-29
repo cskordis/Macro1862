@@ -1,0 +1,105 @@
+LISTING FOR LOGIC DESCRIPTION FILE: ChromaLuma.pld                   Page 1
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# MW-10400000
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Thu Jul 30 14:44:43 2026
+
+  1:/* This program is free software; you can redistribute it and/or
+  2:   modify it under the terms of the GNU General Public License as
+  3:   published by the Free Software Foundation; either version 2 of the
+  4:   License, or (at your option) any later version. */
+  5:
+  6:/* This program is distributed in the hope that it will be useful, but
+  7:   WITHOUT ANY WARRANTY; without even the implied warranty of   
+  8:   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+  9:   General Public License for more details. */
+ 10:
+ 11:/* Equations adapted from David S. Madole project DSM1862 */
+ 12:
+ 13:
+ 14:Name     ChromaLuma ;
+ 15:PartNo   CDP1862 ;
+ 16:Date     07/25/2026 ;
+ 17:Revision 04 ;
+ 18:Designer Costas Skordis ;
+ 19:Company  None ;
+ 20:Assembly None ;
+ 21:Location None ;
+ 22:Device   g22v10 ;
+ 23:
+ 24:/* *************** INPUT PINS  *********************/
+ 25:PIN  1  = !LD_CLK;
+ 26:PIN  2  = RED;
+ 27:PIN  3  = GREEN;
+ 28:PIN  4  = BLUE;
+ 29:PIN  5  = !SYNC;
+ 30:PIN  6  = STP;
+ 31:PIN  7  = BKG;
+ 32:PIN  8  = LUMA;
+ 33:PIN  9  = CHR_90;
+ 34:PIN  10 = CHR_270;
+ 35:PIN  11 = !RESET;
+ 36:PIN  13 = NO_COLOR;   /* Latch Color On*/
+ 37:
+ 38:
+ 39:/* *************** OUTPUT PINS ********************/
+ 40:PIN 14 = RED_CHR;
+ 41:PIN 15 = GREEN_CHR;
+ 42:PIN 16 = BLUE_CHR;
+ 43:PIN 17 = RED_LUM;
+ 44:PIN 18 = GREEN_LUM;
+ 45:PIN 19 = BLUE_LUM;
+ 46:PIN 20 = BKG_LUM;
+ 47:PIN 21 = BKG_STP;      /* Used to clock the background logic counter*/
+ 48:PIN 22 = VLI;          /* Visible Line Interval Active - Chroma and Luma allowed*/
+ 49:PIN 23 = HBI;          /* Horizontal Blank Interval Active - Burst allowed*/
+ 50:
+ 51:
+ 52:/* *************** LOGIC EQUATIONS **************************/
+ 53:WHITE = NO_COLOR # (RED & GREEN & BLUE);
+
+LISTING FOR LOGIC DESCRIPTION FILE: ChromaLuma.pld                   Page 2
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# MW-10400000
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Thu Jul 30 14:44:43 2026
+
+ 54:BLACK = !RED & !GREEN & !BLUE;
+ 55:VLI = !RESET & !SYNC & (VLI # (!SYNC & STP & LD_CLK & !VLI));
+ 56:HBI = !VLI;
+ 57:
+ 58:RED_CHR = CHR_90;
+ 59:GREEN_CHR = CHR_270;
+ 60:BLUE_CHR = CHR_270;
+ 61:
+ 62:APPEND RED_CHR = HBI;
+ 63:APPEND GREEN_CHR = HBI;
+ 64:APPEND BLUE_CHR = HBI;
+ 65:
+ 66:APPEND RED_CHR = LUMA & !RED;
+ 67:APPEND GREEN_CHR = LUMA & !GREEN;
+ 68:APPEND BLUE_CHR = LUMA & !BLUE;
+ 69:
+ 70:APPEND RED_CHR = LUMA & WHITE;
+ 71:APPEND GREEN_CHR = LUMA & WHITE;
+ 72:APPEND BLUE_CHR = LUMA & WHITE;
+ 73:
+ 74:RED_LUM= LUMA & RED;
+ 75:GREEN_LUM= LUMA & GREEN;
+ 76:BLUE_LUM= LUMA & BLUE;
+ 77:
+ 78:APPEND RED_LUM= LUMA & NO_COLOR;
+ 79:APPEND GREEN_LUM= LUMA & NO_COLOR;
+ 80:APPEND BLUE_LUM= LUMA & NO_COLOR;
+ 81:
+ 82:BKG_LUM= LUMA &(NO_COLOR # !BLACK) & VLI;
+ 83:
+ 84:BKG_STP = BKG & STP & VLI;
+ 85:
+
+
+
+Jedec Fuse Checksum       (d24e)
+Jedec Transmit Checksum   (4ba1)

@@ -1,0 +1,84 @@
+/* This program is free software; you can redistribute it and/or
+   modify it under the terms of the GNU General Public License as
+   published by the Free Software Foundation; either version 2 of the
+   License, or (at your option) any later version. */
+
+/* This program is distributed in the hope that it will be useful, but
+   WITHOUT ANY WARRANTY; without even the implied warranty of	
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+   General Public License for more details. */
+
+/* Equations adapted from David S. Madole project DSM1862 */
+
+
+Name     ChromaLuma ;
+PartNo   CDP1862 ;
+Date     07/25/2026 ;
+Revision 04 ;
+Designer Costas Skordis ;
+Company  None ;
+Assembly None ;
+Location None ;
+Device   g22v10 ;
+
+/* *************** INPUT PINS  *********************/
+PIN  1  = !LD_CLK;
+PIN  2  = RED;
+PIN  3  = GREEN;
+PIN  4  = BLUE;
+PIN  5  = !SYNC;
+PIN  6  = STP;
+PIN  7  = BKG;
+PIN  8  = LUMA;
+PIN  9  = CHR_90;
+PIN  10 = CHR_270;
+PIN  11 = !RESET;
+PIN  13 = NO_COLOR;   /* Latch Color On*/
+
+
+/* *************** OUTPUT PINS ********************/
+PIN 14 = RED_CHR;
+PIN 15 = GREEN_CHR;
+PIN 16 = BLUE_CHR;
+PIN 17 = RED_LUM;
+PIN 18 = GREEN_LUM;
+PIN 19 = BLUE_LUM;
+PIN 20 = BKG_LUM;
+PIN 21 = BKG_STP;      /* Used to clock the background logic counter*/
+PIN 22 = VLI;          /* Visible Line Interval Active - Chroma and Luma allowed*/
+PIN 23 = HBI;          /* Horizontal Blank Interval Active - Burst allowed*/
+
+
+/* *************** LOGIC EQUATIONS **************************/
+WHITE = NO_COLOR # (RED & GREEN & BLUE);
+BLACK = !RED & !GREEN & !BLUE;
+VLI = !RESET & !SYNC & (VLI # (!SYNC & STP & LD_CLK & !VLI));
+HBI = !VLI;
+
+RED_CHR = CHR_90;
+GREEN_CHR = CHR_270;
+BLUE_CHR = CHR_270;
+
+APPEND RED_CHR = HBI;
+APPEND GREEN_CHR = HBI;
+APPEND BLUE_CHR = HBI;
+
+APPEND RED_CHR = LUMA & !RED;
+APPEND GREEN_CHR = LUMA & !GREEN;
+APPEND BLUE_CHR = LUMA & !BLUE;
+
+APPEND RED_CHR = LUMA & WHITE;
+APPEND GREEN_CHR = LUMA & WHITE;
+APPEND BLUE_CHR = LUMA & WHITE;
+
+RED_LUM= LUMA & RED;
+GREEN_LUM= LUMA & GREEN;
+BLUE_LUM= LUMA & BLUE;
+
+APPEND RED_LUM= LUMA & NO_COLOR;
+APPEND GREEN_LUM= LUMA & NO_COLOR;
+APPEND BLUE_LUM= LUMA & NO_COLOR;
+
+BKG_LUM= LUMA &(NO_COLOR # !BLACK) & VLI;
+
+BKG_STP = BKG & STP & VLI;
